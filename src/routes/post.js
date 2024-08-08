@@ -6,7 +6,25 @@ router.get('/feed', async (req, res) => {
     const userId = req.user._id; // Assuming you have authentication middleware
 
     const feedPosts = await Post.aggregate([
-        // ... (aggregation logic as described earlier)
+        {
+            $match: {
+                $or: [
+                    {
+                        user: userId
+                    },
+                    {
+                        user: {
+                            $in: req.user.friends
+                        }
+                    },
+                    {
+                        user: {
+                            $in: req.user.following
+                        }
+                    },
+                ],
+            },
+        }
     ]);
     res.json(feedPosts);
 });
