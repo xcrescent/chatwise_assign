@@ -5,7 +5,6 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const mongoose = require('mongoose');
 const apiRouter = require('./routes/router');
-const usersRouter = require('./routes/user');
 const app = express();
 
 // Connect to MongoDB (replace with your actual connection string)
